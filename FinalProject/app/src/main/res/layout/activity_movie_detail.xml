@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Top bar containing the Back Button and Movie Title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="Back"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:elevation="2dp"/>
+
+        <!-- Movie Title -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Movie Hunter"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!-- Horizontal Rule (Divider Line) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/black"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Movie Poster -->
+    <ImageView
+        android:id="@+id/tvMoviePoster"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="Movie Poster"
+        android:scaleType="centerCrop"/>
+
+    <!-- Movie Title -->
+    <TextView
+        android:id="@+id/tvMovieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingTop="16dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Movie Release Date -->
+    <TextView
+        android:id="@+id/tvMovieRelease"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Movie Description (Overview) -->
+    <TextView
+        android:id="@+id/tvMovieDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Movie Rating -->
+    <TextView
+        android:id="@+id/tvMovieRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Spacer to push the button to the bottom -->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- Add to List Button -->
+    <Button
+        android:id="@+id/btnAddToList"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Add to List"
+        android:textSize="16sp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
+        android:elevation="2dp"/>
+</LinearLayout>
