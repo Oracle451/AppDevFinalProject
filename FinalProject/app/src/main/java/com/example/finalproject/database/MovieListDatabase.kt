@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [MovieListEntity::class], version = 1, exportSchema = false)
+@Database(entities = [MovieListEntity::class], version = 2, exportSchema = false)
 abstract class MovieListDatabase : RoomDatabase() {
     abstract fun movieListDao(): MovieListDao
 
@@ -19,7 +19,7 @@ abstract class MovieListDatabase : RoomDatabase() {
                     context.applicationContext,
                     MovieListDatabase::class.java,
                     "movie_list_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 instance
             }

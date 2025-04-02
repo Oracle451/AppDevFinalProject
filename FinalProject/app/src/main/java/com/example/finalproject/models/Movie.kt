@@ -1,5 +1,9 @@
 package com.example.finalproject.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String,
@@ -7,5 +11,5 @@ data class Movie(
     val overview: String,
     val release_date: String,
     val vote_average: Float
-)
+) : Parcelable
 

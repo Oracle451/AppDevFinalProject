@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -63,5 +64,8 @@ dependencies {
     // Other dependencies
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.kotlin.stdlib)
+
+    // Implement gson for room json parsing
+    implementation libs.gson
 
 }

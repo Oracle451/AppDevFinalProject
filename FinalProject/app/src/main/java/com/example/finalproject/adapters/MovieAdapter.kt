@@ -31,9 +31,9 @@ class MovieAdapter(
         fun bind(movie: Movie) {
             binding.tvMovieTitle.text = movie.title
 
-            binding.tvMoviePoster.load("https://image.tmdb.org/t/p/w500${movie.poster_path}") {
+            binding.tvMoviePoster.load(movie.poster_path?.let { "https://image.tmdb.org/t/p/w500$it" }) {
                 placeholder(R.drawable.placeholder)
-                crossfade(true) // Optional, for a smooth transition
+                crossfade(true)
             }
 
             binding.root.setOnClickListener {
