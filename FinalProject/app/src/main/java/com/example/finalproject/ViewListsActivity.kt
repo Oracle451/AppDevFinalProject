@@ -58,13 +58,14 @@ class ViewListsActivity : AppCompatActivity() {
 
         // Set button listeners
         btnBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
         btnNewList.setOnClickListener {
             val intent = Intent(this, MakeListActivity::class.java) // Specify the target activity
             startActivity(intent) // Start the activity
+
+            finish()
         }
     }
     private fun showCreateListDialog() {

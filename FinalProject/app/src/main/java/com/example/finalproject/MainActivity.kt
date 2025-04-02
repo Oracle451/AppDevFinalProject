@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ViewListsActivity::class.java) // Specify the target activity
             startActivity(intent) // Start the activity
         }
-
     }
 
     private fun searchMovies(query: String) {

@@ -28,55 +28,43 @@ class MovieListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_list)
 
-        // Initialize repository and view model
         val dao = MovieListDatabase.getDatabase(application).movieListDao()
         repository = MovieListRepository(dao)
         movieListViewModel = MovieListViewModel(repository)
 
-        // Find views
         val btnBack: Button = findViewById(R.id.btnBack)
         val deleteListBtn: Button = findViewById(R.id.deleteListBtn)
         val renameListBtn: Button = findViewById(R.id.renameListBtn)
         val tvListName: TextView = findViewById(R.id.tvListName)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewMovies)
 
-        // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Get the list ID from the intent
         val movieListEntityFromIntent = intent.getParcelableExtra<MovieListEntity>("movieListEntity")
         val listId = movieListEntityFromIntent?.id
 
-        // Fetch the latest MovieListEntity from the database
         if (listId != null) {
             CoroutineScope(Dispatchers.Main).launch {
                 val movieListEntity = repository.getListById(listId)
                 val movies = movieListEntity?.movies ?: emptyList()
                 println("Movies fetched: $movies")
 
-                // Set adapter with the movies
                 val adapter = MovieAdapter(movies) { movie -> }
                 recyclerView.adapter = adapter
-                recyclerView.visibility = View.VISIBLE // Make RecyclerView visible
+                recyclerView.visibility = View.VISIBLE
 
-                // Update the list name TextView
                 movieListEntity?.let {
                     tvListName.text = it.name
                 }
 
-                // Delete List button click listener
                 deleteListBtn.setOnClickListener {
                     movieListEntity?.let { entity ->
                         CoroutineScope(Dispatchers.Main).launch {
                             repository.deleteListById(entity.id)
-                            val intent = Intent(this@MovieListActivity, ViewListsActivity::class.java)
-                            startActivity(intent)
-                            finish()
                         }
                     }
                 }
 
-                // Rename button click listener
                 renameListBtn.setOnClickListener {
                     movieListEntity?.let { entity ->
                         val editText = EditText(this@MovieListActivity).apply {
@@ -100,17 +88,10 @@ class MovieListActivity : AppCompatActivity() {
                 }
             }
         } else {
-            val movies = movieListEntityFromIntent?.movies ?: emptyList()
-            val adapter = MovieAdapter(movies) { movie -> }
-            recyclerView.adapter = adapter
-            recyclerView.visibility = View.VISIBLE // Make visible in fallback too
-            movieListEntityFromIntent?.let { tvListName.text = it.name }
+            finish()
         }
 
-        // Back button click listener
         btnBack.setOnClickListener {
-            val intent = Intent(this, ViewListsActivity::class.java)
-            startActivity(intent)
             finish()
         }
     }

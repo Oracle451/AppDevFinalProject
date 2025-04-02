@@ -56,9 +56,7 @@ class AddToListActivity : AppCompatActivity() {
 
         // Back button click listener
         btnBack.setOnClickListener {
-            val intent = Intent(this, MovieDetailActivity::class.java)
-            startActivity(intent)
-            finish()
+            finish() // Simply return to the previous activity
         }
     }
 }

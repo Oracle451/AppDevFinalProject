@@ -58,8 +58,6 @@ class MovieDetailActivity : AppCompatActivity() {
         // Back button
         val btnBack: Button = findViewById(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             finish()
         }
 
@@ -67,9 +65,9 @@ class MovieDetailActivity : AppCompatActivity() {
         val btnAddToList: Button = findViewById(R.id.btnAddToList)
         btnAddToList.setOnClickListener {
             val intent = Intent(this, AddToListActivity::class.java).apply {
-                putExtra("movie", movie) // Pass the Movie object
+                putExtra("movie", movie)
             }
-            startActivity(intent)
+            startActivity(intent) // No finish(), keep this instance alive
         }
     }
 }
