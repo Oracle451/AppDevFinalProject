@@ -44,6 +44,8 @@ class ViewListsActivity : AppCompatActivity() {
                 putExtra("LIST_NAME", list.name) // Pass the list name to the next activity
             }
             startActivity(intent)
+
+            finish()
         }
         rvMovieLists.layoutManager = LinearLayoutManager(this)
         rvMovieLists.adapter = movieListAdapter

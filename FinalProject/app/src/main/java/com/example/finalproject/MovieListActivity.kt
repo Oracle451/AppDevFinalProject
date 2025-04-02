@@ -63,6 +63,11 @@ class MovieListActivity : AppCompatActivity() {
                             repository.deleteListById(entity.id)
                         }
                     }
+
+                    val intent = Intent(this@MovieListActivity, ViewListsActivity::class.java)
+                    startActivity(intent)
+
+                    finish()
                 }
 
                 renameListBtn.setOnClickListener {
@@ -92,6 +97,9 @@ class MovieListActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
+
+            val intent = Intent(this@MovieListActivity, ViewListsActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }

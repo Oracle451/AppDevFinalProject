@@ -42,6 +42,9 @@ class MakeListActivity : AppCompatActivity() {
 
         // Set up the onClickListener to navigate back to MainActivity
         btnBack.setOnClickListener {
+            val intent = Intent(this@MakeListActivity, ViewListsActivity::class.java)
+            startActivity(intent)
+
             finish() // Finish ViewListsActivity so the user can't return to it by pressing back
         }
     }
