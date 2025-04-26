@@ -49,7 +49,7 @@ class MovieListActivity : AppCompatActivity() {
                 val movies = movieListEntity?.movies ?: emptyList()
                 println("Movies fetched: $movies")
 
-                val adapter = MovieAdapter(movies) { movie -> }
+                val adapter = MovieAdapter(movies, "movieList") { movie -> }
                 recyclerView.adapter = adapter
                 recyclerView.visibility = View.VISIBLE
 

@@ -20,7 +20,7 @@
             android:layout_height="56dp"
             android:text="Back"
             android:textSize="16sp"
-            android:padding="16dp"
+            android:padding="12dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="@android:color/holo_blue_dark"
             android:textColor="@android:color/white"
@@ -36,6 +36,21 @@
             android:gravity="center"
             android:textColor="@android:color/black"
             android:layout_weight="1"/>
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="Remove!"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:textColor="@android:color/white"
+            android:elevation="2dp"
+            android:visibility="invisible"/>
+
     </LinearLayout>
 
     <!-- Horizontal Rule (Divider Line) -->

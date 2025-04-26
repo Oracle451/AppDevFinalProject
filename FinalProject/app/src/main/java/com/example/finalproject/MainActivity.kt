@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
                     val movies = response.body()?.results ?: emptyList()
-                    adapter = MovieAdapter(movies) { movie ->
+                    adapter = MovieAdapter(movies, "home") { movie ->
                         Toast.makeText(this@MainActivity, "Clicked: ${movie.title}", Toast.LENGTH_SHORT).show()
                     }
                     recyclerView.adapter = adapter

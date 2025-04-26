@@ -74,7 +74,6 @@ class AddToListActivity : AppCompatActivity() {
 
             recyclerView.adapter = adapter
 
-
         }
 
         // Back button click listener

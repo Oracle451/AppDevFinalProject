@@ -1,8 +1,10 @@
 package com.example.finalproject.adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat.getCallingActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.MovieDetailActivity
 import com.example.finalproject.R
@@ -12,6 +14,7 @@ import coil.load
 
 class MovieAdapter(
     private val movies: List<Movie>,
+    private val sender: String,
     private val onClick: (Movie) -> Unit
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -45,6 +48,7 @@ class MovieAdapter(
                 intent.putExtra("movieOverview", movie.overview)
                 intent.putExtra("movieRelease", movie.release_date)
                 intent.putExtra("movieRating", movie.vote_average.toString())
+                intent.putExtra("sender", sender)
                 context.startActivity(intent)
             }
         }

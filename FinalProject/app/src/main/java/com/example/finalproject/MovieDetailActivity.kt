@@ -2,12 +2,24 @@ package com.example.finalproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.finalproject.adapters.AddToListAdapter
+import com.example.finalproject.database.MovieListDatabase
 import com.example.finalproject.models.Movie
+import com.example.finalproject.repository.MovieListRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -16,6 +28,7 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var tvMovieRelease: TextView
     private lateinit var tvMovieOverview: TextView
     private lateinit var tvMovieLength: TextView // Fixed typo: Lenth -> Length
+    private lateinit var repository: MovieListRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +48,7 @@ class MovieDetailActivity : AppCompatActivity() {
         val movieOverview = intent.getStringExtra("movieOverview") ?: "Overview not available"
         val movieRelease = intent.getStringExtra("movieRelease") ?: "Release date not available"
         val movieRating = intent.getStringExtra("movieRating")?.toFloatOrNull() ?: 0f
+        val sender = intent.getStringExtra("sender") ?: ""
 
         // Reconstruct the Movie object
         val movie = Movie(
@@ -47,7 +61,7 @@ class MovieDetailActivity : AppCompatActivity() {
         )
 
         // Set the data to views
-        tvMovieTitle.text = movieTitle
+        tvMovieTitle.text = "$movieTitle"
         tvMoviePoster.load("https://image.tmdb.org/t/p/w500$moviePoster") {
             crossfade(true)
         }
@@ -60,6 +74,51 @@ class MovieDetailActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
+
+
+
+        val deleteButton: Button = findViewById(R.id.delete)
+
+
+        if (sender == "home") {
+            deleteButton.setVisibility(View.GONE)
+
+        } else if (sender == "movieList") {
+            deleteButton.setVisibility(View.VISIBLE)
+
+        }
+        // Initialize repository
+        repository = MovieListRepository(MovieListDatabase.getDatabase(applicationContext).movieListDao())
+
+        deleteButton.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val movieLists = repository.getLists()
+
+                // Find the list you want to update
+                val targetList = movieLists.find { list ->
+                    list.movies.any { it.id == movie.id }
+                }
+
+                if (targetList != null) {
+                    val updatedMovies = targetList.movies.toMutableList().apply {
+                        removeIf { it == movie }
+                    }
+
+                    val updatedList = targetList.copy(movies = updatedMovies)
+                    repository.updateList(updatedList)
+
+                    // Finish activity on main thread
+                    withContext(Dispatchers.Main) {
+                        finish()
+                    }
+                }
+            }
+            Toast.makeText(this, "Movie Deleted", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
+
+
+        }
+
 
         // Add to List button
         val btnAddToList: Button = findViewById(R.id.btnAddToList)
