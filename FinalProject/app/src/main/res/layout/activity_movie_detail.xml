@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@color/background">
 
     <!-- Top bar containing the Back Button and Movie Title -->
     <LinearLayout
@@ -22,7 +22,7 @@
             android:textSize="16sp"
             android:padding="12dp"
             android:layout_marginStart="8dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
+            android:backgroundTint="@color/dark_red"
             android:textColor="@android:color/white"
             android:elevation="2dp"/>
 
@@ -34,7 +34,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_weight="1"/>
 
         <!-- Back Button -->
@@ -57,7 +57,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@android:color/black"
+        android:background="@android:color/white"
         android:layout_marginBottom="16dp"/>
 
     <!-- Movie Poster -->
@@ -76,7 +76,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:paddingTop="16dp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"/>
 
     <!-- Movie Release Date -->
     <TextView
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:paddingTop="8dp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"/>
 
     <!-- Movie Description (Overview) -->
     <TextView
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:paddingTop="8dp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"/>
 
     <!-- Movie Rating -->
     <TextView
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:paddingTop="8dp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"/>
 
     <!-- Spacer to push the button to the bottom -->
     <Space
@@ -118,7 +118,7 @@
         android:layout_height="56dp"
         android:text="Add to List"
         android:textSize="16sp"
-        android:backgroundTint="@android:color/holo_blue_dark"
+        android:backgroundTint="@color/dark_red"
         android:textColor="@android:color/white"
         android:elevation="2dp"/>
 </LinearLayout>
