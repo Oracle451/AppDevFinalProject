@@ -17,6 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
+    //Api set up
+    //RV set up
     private lateinit var apiService: TmdbApiService
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MovieAdapter
@@ -30,9 +32,11 @@ class MainActivity : AppCompatActivity() {
         val btnSearch = findViewById<Button>(R.id.btnSearch)
         val btnViewLists = findViewById<Button>(R.id.btnViewLists)
         recyclerView = findViewById(R.id.recyclerViewMovies)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // Retrofit setup
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -40,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         apiService = retrofit.create(TmdbApiService::class.java)
 
+        //Search button handler
         btnSearch.setOnClickListener {
             val query = editTextSearch.text.toString().trim()
             if (query.isNotEmpty()) {
@@ -49,15 +54,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //View Lists button handler
         btnViewLists.setOnClickListener {
             val intent = Intent(this, ViewListsActivity::class.java) // Specify the target activity
             startActivity(intent) // Start the activity
         }
     }
 
+    //The function that the search button calls
     private fun searchMovies(query: String) {
         apiService.searchMovies(apiKey, query).enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                // Handle the response, either on success or on error.
                 if (response.isSuccessful) {
                     val movies = response.body()?.results ?: emptyList()
                     adapter = MovieAdapter(movies, "home") { movie ->
