@@ -31,12 +31,6 @@ class AddToListAdapter(
         holder.btnList.text = list.name
         holder.btnList.setOnClickListener {
             onListSelected(list, movie)
-            // Show toast after selection
-            Toast.makeText(
-                holder.itemView.context,
-                "${movie.title} was successfully added to ${list.name}",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
